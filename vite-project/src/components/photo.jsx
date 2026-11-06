@@ -1,1 +1,0 @@
-//A Photo component that will display an li and img element.
