@@ -1,0 +1,1 @@
+//A Search component for handling user queries.
