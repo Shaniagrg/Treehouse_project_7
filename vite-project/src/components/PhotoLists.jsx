@@ -1,16 +1,21 @@
-//A PhotoList component that will render all of your Photo components.
 import React from "react";
-import Photos from "./Photos";
+import Photo from "./Photos.jsx";
 
-const PhotoLists = () => {
+//loop over the image data from from the api call
+//photo component is passed img url and description
+
+const PhotoLists = ({title, photoData}) => {
     return(
         <div className="photo-container">
-            <h2>Results</h2>
+            <h2>{title}</h2>
             <ul>
-                <Photos />
-                <Photos />
-                <Photos />
-                <Photos />
+                {
+                    photoData && photoData.map((val, idx)=> {
+                        return (
+                            <Photo key={idx} imgUrl={val.previewURL} imgDescription={val.description}/>
+                        )
+                    })
+                }
             </ul>
       </div>
     )
