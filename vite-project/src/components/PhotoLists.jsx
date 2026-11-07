@@ -1,16 +1,16 @@
 //A PhotoList component that will render all of your Photo components.
 import React from "react";
-import Photo from "./Gallery";
+import Photos from "./Photos";
 
-const PhotoList = () => {
+const PhotoLists = () => {
     return(
         <div className="photo-container">
             <h2>Results</h2>
             <ul>
-                <Photo />
-                <Photo />
-                <Photo />
-                <Photo />
+                <Photos />
+                <Photos />
+                <Photos />
+                <Photos />
                     {/*<!-- Not Found -->*/}
                 <li className="not-found">
                     <h3>No Results Found</h3>
@@ -21,4 +21,4 @@ const PhotoList = () => {
     )
 }
 
-export default PhotoList;
+export default PhotoLists;
