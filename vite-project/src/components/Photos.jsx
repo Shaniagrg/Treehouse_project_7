@@ -1,12 +1,13 @@
 //A Photo component that will display an li and img element.
 import React from "react";
 
-const Photos = () => {
+//receive the image url and description which will be used as image source and alt respectively
+const Photo = ({imgUrl, imgDescription}) => {
     return(
         <li>
-            <img src="https://farm5.staticflickr.com/4334/37032996241_4c16a9b530.jpg" alt="Gallery Photo"/>
+            <img src={imgUrl} alt={imgDescription}/>
         </li>
     )
 }
 
-export default Photos;
+export default Photo;
