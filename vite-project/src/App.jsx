@@ -1,11 +1,10 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 //Import Components
 import Nav from "./components/Nav";
 import Search from "./components/Search";
-import Gallery from "./components/Gallery";
-//import PhotoList from "./components/PhotoList";
+import PhotoLists from "./components/PhotoLists";
 
 const App = () => {
   return(
@@ -13,11 +12,11 @@ const App = () => {
       <Search/>
       <Nav/>
       <Routes>
-        <Route path="/" element={<Gallery/>}/>
-        <Route path="/cats" element={<Gallery/>}/>
-        <Route path="/dogs" element={<Gallery />}/>
-        <Route path="/computers" element={<Gallery />}/>
-        <Route path="/search/:query" element={}/>
+        <Route path="/" element={<Navigate to="/cats" />}/>
+        <Route path="/cats" element={<PhotoLists />}/>
+        <Route path="/dogs" element={<PhotoLists/>}/>
+        <Route path="/computers" element={<PhotoLists />}/>
+        <Route path="/search/:query" element={<PhotoLists />}/>
       </Routes>
     </div>
   )
