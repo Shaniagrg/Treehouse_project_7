@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useCallback} from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import { Route, Routes, Navigate, useNavigate, useLocation } from "react-router-dom";
 
 //Import Components
 import Nav from "./components/Nav";
@@ -17,6 +17,30 @@ const App = () => {
   //store the api data into the photoData
   const [photoData, setPhotoData] = useState(null);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const getQueryFromPath = () => {
+    const path = location.pathname;
+    if (path.startsWith('/search')){
+      return path.split('/')[2];
+    }else if (path === '/cats' || path === '/dogs' || path === '/computers'){
+      return path.replace('/', '')
+    }
+    return '';
+  };
+
+  const currQuery = getQueryFromPath();
+
+  //using useEffect when word changes
+  useEffect(() => {
+    if (word){
+      navigate(`/search/${word}`);
+    }
+    }, [word, navigate]
+  );
+
+
   //using useEffect to call the api
   //using word variable which is a state as a dependency to render the UI
   useEffect(() => {
@@ -31,20 +55,21 @@ const App = () => {
     }
 
     //call api only if we have search word, if search word is empty, avoid api call
-    if(word)
-      fetchData(word);
+    if(currQuery)
+      fetchData(currQuery);
     
-  }, [word]);
+  }, [currQuery]);
 
   return(
     <div className="container">
       <Search setWord={setWord}/>
-      <Nav/>
+      {/* <PhotoLists title={word} photoData={photoData}/> */}
+      <Nav />
       <Routes>
         <Route path="/" element={<Navigate to="/cats" />}/>
-        <Route path="/cats" element={<PhotoLists />}/>
-        <Route path="/dogs" element={<PhotoLists/>}/>
-        <Route path="/computers" element={<PhotoLists />}/>
+        <Route path="/cats" element={<PhotoLists title="cats" photoData={photoData}/>}/>
+        <Route path="/dogs" element={<PhotoLists title="dogs" photoData={photoData}/>}/>
+        <Route path="/computers" element={<PhotoLists title="computers" photoData={photoData}/>}/>
         <Route path="/search/:query" element={<PhotoLists photoData={photoData} />}/>
       </Routes>
     </div>
