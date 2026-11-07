@@ -1,14 +1,31 @@
 //A Search component for handling user queries.
-import React from "react";
+import React, {useState} from "react";
 
-const Search = () => {
+const Search = ({setWord}) => {
+    //stores what you typed in the search bar
+    const [input, setInput] = useState('');
+    
+    //input change handler
+    const handleChange = (e) => {
+        setInput(e.target.value);
+    }
+    
+    //form submission handler
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setWord(input);
+        setInput('');
+    }
+
     return (
-        <form className="search-form">
+        <form className="search-form" onSubmit={handleSubmit}>
             <input 
                 type="search" 
                 name="search" 
                 placeholder="Search" 
                 required
+                value={input}
+                onChange={handleChange}
             />
             <button type="submit" className="search-button">
             <svg 
